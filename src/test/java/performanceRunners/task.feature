@@ -4,18 +4,12 @@
       Given url baseUrl
 
 
-    Scenario: Get Deneme
-      And path 'pet', 1
-      When method GET
-      Then print response
-      And status 200
+#    Scenario: Get Deneme
+#      And path 'pet', 1
+#      When method GET
+#      Then print response
+#      And status 200
 
-    Scenario: User Get
-      And path 'user'
-      And request 'akgul'
-      When method GET
-      Then print response
-      And status 200
 
     Scenario: External Data User Create
       And def myRequestBody = read('classpath:data/user.json')
@@ -23,6 +17,13 @@
       And request myRequestBody
       When method POST
       Then status 200
+
+    Scenario: User Get
+      And path 'user'
+      And request 'akgul'
+      When method GET
+      Then print response
+      And status 200
 
     Scenario: Status Available Pet Create
       And path 'pet'
@@ -32,6 +33,17 @@
       Then print response
       Then status 200
       * def id = karate.keysOf(response.id)
+      * print 'id'
+
+
+    Scenario: Status Sold Pet Create
+      And path 'pet'
+      And def soldPetBody = read('classpath:data/soldPet.json')
+      And request soldPetBody
+      When method POST
+      Then print response
+      Then status 200
+      * def soldId = karate.keysOf(response.id)
       * print 'id'
 
 
